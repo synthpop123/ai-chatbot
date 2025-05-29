@@ -125,7 +125,7 @@ const PurePreviewMessage = ({
 
                       <div
                         data-testid="message-content"
-                        className={cn('flex flex-col gap-4', {
+                        className={cn('prose dark:prose-invert prose-sm max-w-none', {
                           'bg-primary text-primary-foreground px-3 py-2 rounded-xl':
                             message.role === 'user',
                         })}
@@ -276,7 +276,7 @@ export const ThinkingMessage = () => {
 
         <div className="flex flex-col gap-2 w-full">
           <div className="flex flex-col gap-4 text-muted-foreground">
-            Waiting for response...
+            Hmm...
           </div>
         </div>
       </div>

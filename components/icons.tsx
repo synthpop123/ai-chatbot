@@ -1172,3 +1172,46 @@ export const WarningIcon = ({ size = 16 }: { size?: number }) => {
     </svg>
   );
 };
+
+export const SunIcon = ({ size = 16 }: { size?: number }) => {
+  return (
+    <svg
+      height={size}
+      strokeLinejoin="round"
+      viewBox="0 0 24 24"
+      width={size}
+      style={{ color: 'currentcolor' }}
+    >
+      <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" fill="none"/>
+      <path d="M12 2v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M12 20v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M4.93 4.93l1.41 1.41" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M17.66 17.66l1.41 1.41" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M2 12h2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M20 12h2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M6.34 17.66l-1.41 1.41" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M19.07 4.93l-1.41 1.41" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    </svg>
+  );
+};
+
+export const MoonIcon = ({ size = 16 }: { size?: number }) => {
+  return (
+    <svg
+      height={size}
+      strokeLinejoin="round"
+      viewBox="0 0 24 24"
+      width={size}
+      style={{ color: 'currentcolor' }}
+    >
+      <path 
+        d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round"
+        fill="none"
+      />
+    </svg>
+  );
+};
