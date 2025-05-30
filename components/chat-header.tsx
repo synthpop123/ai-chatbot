@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useWindowSize } from 'usehooks-ts';
 import { useTheme } from 'next-themes';
@@ -47,14 +46,14 @@ function PureChatHeader({
           <TooltipTrigger asChild>
             <Button
               variant="outline"
-              className="order-2 md:order-1 md:px-2 px-2 md:h-fit ml-auto md:ml-0"
+              className="order-2 md:order-1 md:px-2 md:h-fit ml-auto md:ml-0"
               onClick={() => {
                 router.push('/');
                 router.refresh();
               }}
             >
               <PlusIcon />
-              <span className="md:sr-only">New Chat</span>
+              <span className="sr-only">New Chat</span>
             </Button>
           </TooltipTrigger>
           <TooltipContent>New Chat</TooltipContent>
@@ -65,7 +64,7 @@ function PureChatHeader({
         <ModelSelector
           session={session}
           selectedModelId={selectedModelId}
-          className="order-1 md:order-2"
+          className="order-3 md:order-2"
         />
       )}
 
@@ -73,7 +72,7 @@ function PureChatHeader({
         <VisibilitySelector
           chatId={chatId}
           selectedVisibilityType={selectedVisibilityType}
-          className="order-1 md:order-3"
+          className="order-4 md:order-3"
         />
       )}
 
@@ -82,7 +81,7 @@ function PureChatHeader({
           <Button
             variant="outline"
             size="icon"
-            className="hidden md:flex order-4 md:ml-auto"
+            className="order-5 md:order-4 md:ml-auto"
             onClick={toggleTheme}
           >
             {theme === 'dark' ? <SunIcon size={16} /> : <MoonIcon size={16} />}
