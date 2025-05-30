@@ -3,7 +3,7 @@ import {
   extractReasoningMiddleware,
   wrapLanguageModel,
 } from 'ai';
-import { xai } from '@ai-sdk/xai';
+import { createOpenAI } from '@ai-sdk/openai';
 import { isTestEnvironment } from '../constants';
 import {
   artifactModel,
@@ -11,6 +11,12 @@ import {
   reasoningModel,
   titleModel,
 } from './models.test';
+
+
+const newapi = createOpenAI({
+  compatibility: 'compatible',
+  baseURL: process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1',
+});
 
 export const myProvider = isTestEnvironment
   ? customProvider({
@@ -23,15 +29,15 @@ export const myProvider = isTestEnvironment
     })
   : customProvider({
       languageModels: {
-        'chat-model': xai('grok-3-fast'),
+        'chat-model': newapi.chat('grok-3-fast'),
         'chat-model-reasoning': wrapLanguageModel({
-          model: xai('grok-3-mini-fast'),
+          model: newapi.chat('deepseek-r1'),
           middleware: extractReasoningMiddleware({ tagName: 'think' }),
         }),
-        'title-model': xai('grok-3-fast'),
-        'artifact-model': xai('grok-3-fast'),
+        'title-model': newapi.chat('glm-4-32b'),
+        'artifact-model': newapi.chat('deepseek-r1'),
       },
       imageModels: {
-        'small-model': xai.image('grok-2-image'),
+        'small-model': newapi.image('grok-2-image'),
       },
     });

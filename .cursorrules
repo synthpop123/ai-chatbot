@@ -1,0 +1,326 @@
+# AI Chatbot - Cursor Rules
+
+## Project Overview
+This is a modern AI chatbot application built with Next.js 15, React 19, and the Vercel AI SDK. The project uses TypeScript, Tailwind CSS, shadcn/ui components, Drizzle ORM with Neon Postgres, and Auth.js for authentication.
+
+**Tech Stack:**
+- Framework: Next.js 15 with App Router
+- Language: TypeScript (strict mode)
+- UI: React 19 RC + shadcn/ui + Radix UI + Tailwind CSS
+- AI: Vercel AI SDK (default: xAI Grok-2)
+- Database: Neon Serverless Postgres + Drizzle ORM
+- Auth: Auth.js (NextAuth v5)
+- Styling: Tailwind CSS with CSS variables
+- Code Quality: Biome (formatting + linting)
+- Package Manager: pnpm
+- Deployment: Vercel
+
+## Code Style & Formatting
+
+### Follow Biome Configuration
+- Use the existing biome.jsonc configuration for all formatting and linting
+- 2-space indentation, semicolons, single quotes for JS/TS, double quotes for JSX
+- Line width: 80 characters
+- Trailing commas in multiline structures
+
+### TypeScript Guidelines
+- Always use TypeScript for all new files
+- Enable strict mode and maintain type safety
+- Use proper type definitions, avoid `any` unless absolutely necessary
+- Prefer interfaces over types for object shapes
+- Use proper generic constraints and utility types
+- Import types using `import type { }` syntax
+
+### Import Organization
+- Use absolute imports with `@/` prefix (configured in tsconfig)
+- Group imports: React/Next.js, third-party libraries, local components, types
+- Use named exports by default, default exports only for pages/layouts
+
+## Next.js App Router Best Practices
+
+### File Structure
+- Use the app directory structure with proper route grouping
+- Place route handlers in `api/` folders within route groups
+- Use `loading.tsx`, `error.tsx`, and `not-found.tsx` appropriately
+- Implement proper metadata for SEO in `page.tsx` files
+
+### Server Components
+- Prefer Server Components by default for better performance
+- Use `'use client'` directive only when necessary (interactivity, hooks, browser APIs)
+- Implement proper data fetching in Server Components
+- Use `unstable_cache` for expensive computations
+
+### Server Actions
+- Define server actions in separate files with `'use server'` directive
+- Use proper error handling and validation with Zod
+- Implement optimistic updates where appropriate
+- Return proper success/error states
+
+## React Component Development
+
+### Component Patterns
+- Use functional components with hooks
+- Implement proper prop types with TypeScript interfaces
+- Use compound component patterns for complex UI
+- Implement proper error boundaries where needed
+
+### State Management
+- Use React hooks for local state (`useState`, `useReducer`)
+- Use SWR for server state management and caching
+- Implement proper loading and error states
+- Use optimistic updates for better UX
+
+### Component Structure
+```typescript
+interface ComponentProps {
+  // Define props with proper types
+}
+
+export function Component({ prop1, prop2 }: ComponentProps) {
+  // Component logic
+  return (
+    // JSX
+  );
+}
+```
+
+## UI & Styling Guidelines
+
+### Tailwind CSS
+- Use the configured design system variables in tailwind.config.ts
+- Implement responsive design with mobile-first approach
+- Use CSS variables for theming (light/dark mode support)
+- Leverage Tailwind utilities, create custom components for repeated patterns
+
+### shadcn/ui Components
+- Use existing shadcn/ui components from `components/ui/`
+- Follow the established component patterns and prop interfaces
+- Customize components using Tailwind classes and CSS variables
+- Implement proper accessibility attributes
+
+### Design Patterns
+- Support both light and dark themes
+- Use consistent spacing with Tailwind's spacing scale
+- Implement proper focus states and keyboard navigation
+- Follow Material Design or similar accessibility guidelines
+
+## AI SDK Integration
+
+### Chat Implementation
+- Use `useChat` hook for chat functionality
+- Implement proper message streaming and display
+- Handle tool calls and function calling appropriately
+- Support multimodal inputs (text, images, files)
+
+### Model Configuration
+- Use the configured AI providers (xAI, OpenAI, etc.)
+- Implement proper model switching functionality
+- Handle API rate limits and error states
+- Support different model capabilities (text, vision, tools)
+
+### Tools and Function Calling
+- Define tools in `lib/ai/tools/` directory
+- Use proper Zod schemas for tool parameters
+- Implement proper error handling for tool execution
+- Support streaming tool results
+
+## Database Operations
+
+### Drizzle ORM
+- Define schemas in `lib/db/schema.ts`
+- Use proper TypeScript types from Drizzle
+- Implement proper migrations in `lib/db/migrations/`
+- Use transactions for complex operations
+
+### Data Fetching
+- Use proper connection pooling
+- Implement proper error handling for database operations
+- Use prepared statements for repeated queries
+- Implement proper data validation with Zod
+
+### Query Patterns
+```typescript
+// Prefer this pattern
+const users = await db.select().from(usersTable).where(eq(usersTable.id, userId));
+
+// Use transactions for related operations
+await db.transaction(async (tx) => {
+  // Multiple related operations
+});
+```
+
+## Authentication & Security
+
+### Auth.js Implementation
+- Use the configured Auth.js setup with proper providers
+- Implement proper session management
+- Use middleware for route protection
+- Handle authentication states properly in components
+
+### Security Best Practices
+- Validate all user inputs with Zod schemas
+- Implement proper CSRF protection
+- Use environment variables for secrets
+- Implement proper rate limiting for API routes
+
+### Data Protection
+- Encrypt sensitive data before storage
+- Implement proper user data isolation
+- Use proper SQL injection prevention
+- Validate file uploads and implement size limits
+
+## Performance Optimization
+
+### React Performance
+- Use `React.memo()` for expensive components
+- Implement proper key props for lists
+- Use `useMemo` and `useCallback` judiciously
+- Implement code splitting and lazy loading
+
+### Next.js Performance
+- Use proper image optimization with Next.js Image component
+- Implement proper caching strategies
+- Use Partial Prerendering (PPR) where appropriate
+- Optimize bundle size with proper imports
+
+### Database Performance
+- Use proper database indexing
+- Implement query optimization
+- Use connection pooling
+- Implement proper caching layers
+
+## Error Handling & Debugging
+
+### Error Boundaries
+- Implement error boundaries for component trees
+- Use proper error logging and reporting
+- Provide meaningful error messages to users
+- Implement fallback UI for error states
+
+### API Error Handling
+```typescript
+try {
+  // API operation
+} catch (error) {
+  console.error('Operation failed:', error);
+  // Proper error handling
+  return { error: 'User-friendly message' };
+}
+```
+
+### Debugging
+- Use proper console logging for development
+- Implement structured logging for production
+- Use proper error tracking (if configured)
+- Implement proper debug modes
+
+## Testing & Code Quality
+
+### Testing Strategy
+- Write unit tests for utility functions
+- Implement integration tests for API routes
+- Use Playwright for E2E tests (configured)
+- Test accessibility with proper tools
+
+### Code Quality
+- Follow the configured Biome rules
+- Use proper TypeScript strict mode
+- Implement proper code reviews
+- Use proper git commit conventions
+
+### Documentation
+- Write clear JSDoc comments for complex functions
+- Document component props and usage
+- Maintain up-to-date README files
+- Document API endpoints and schemas
+
+## File Naming & Organization
+
+### Naming Conventions
+- Use kebab-case for file names
+- Use PascalCase for component files
+- Use camelCase for utility functions
+- Use SCREAMING_SNAKE_CASE for constants
+
+### Directory Structure
+```
+app/                 # Next.js app directory
+  (auth)/           # Route groups
+  (chat)/
+components/         # Reusable components
+  ui/              # shadcn/ui components
+lib/               # Utility functions and configurations
+  ai/              # AI-related utilities
+  db/              # Database schemas and utilities
+  artifacts/       # Artifact handling
+hooks/             # Custom React hooks
+```
+
+### Component Organization
+- One component per file
+- Co-locate related components in subdirectories
+- Use index files for clean imports
+- Separate logic from presentation when complex
+
+## Tools & Libraries Usage
+
+### Vercel AI SDK
+- Use the latest patterns from AI SDK documentation
+- Implement proper streaming responses
+- Handle tool calls appropriately
+- Support different AI providers
+
+### Drizzle ORM
+- Follow Drizzle best practices for schema definition
+- Use proper migration workflows
+- Implement proper type safety
+- Use Drizzle Studio for development
+
+### Tailwind CSS
+- Use the configured design tokens
+- Implement responsive design patterns
+- Use proper dark mode support
+- Follow the established spacing and color systems
+
+## Development Workflow
+
+### Git Workflow
+- Use conventional commit messages
+- Create feature branches for new work
+- Implement proper code reviews
+- Use proper branch protection rules
+
+### Environment Management
+- Use proper environment variables for configuration
+- Implement different configs for dev/staging/prod
+- Use Vercel environment management
+- Keep secrets secure and properly managed
+
+### Deployment
+- Use Vercel for deployment and hosting
+- Implement proper CI/CD workflows
+- Use proper environment variable management
+- Monitor performance and errors
+
+## Code Review Guidelines
+
+### Review Checklist
+- [ ] TypeScript types are properly defined
+- [ ] Components follow established patterns
+- [ ] Error handling is implemented
+- [ ] Performance considerations are addressed
+- [ ] Accessibility is maintained
+- [ ] Tests are included (if applicable)
+- [ ] Documentation is updated
+- [ ] Security considerations are addressed
+
+### Quality Standards
+- Maintain high code quality and consistency
+- Ensure proper error handling throughout
+- Implement proper loading states
+- Follow accessibility best practices
+- Maintain backward compatibility when possible
+
+---
+
+**Remember:** This is a production-grade AI chatbot application. Always prioritize user experience, security, and performance in all development decisions. 
