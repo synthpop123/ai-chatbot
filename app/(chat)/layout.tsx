@@ -18,7 +18,7 @@ export default async function Layout({
   return (
     <>
       <Script
-        src="https://cdn.jsdelivr.net/pyodide/v0.27.6/full/pyodide.min.js"
+        src="https://cdn.jsdelivr.net/npm/pyodide@0.27.6/pyodide.min.js"
         strategy="beforeInteractive"
       />
       <SidebarProvider defaultOpen={!isCollapsed}>
