@@ -29,13 +29,13 @@ export const myProvider = isTestEnvironment
     })
   : customProvider({
       languageModels: {
-        'chat-model': newapi.chat('grok-3-fast'),
+        'chat-model': newapi.chat('gpt-4o'),
         'chat-model-reasoning': wrapLanguageModel({
-          model: newapi.chat('deepseek-r1'),
+          model: newapi.chat('qwen3-235b-a22b'),
           middleware: extractReasoningMiddleware({ tagName: 'think' }),
         }),
-        'title-model': newapi.chat('glm-4-32b'),
-        'artifact-model': newapi.chat('deepseek-r1'),
+        'title-model': newapi.chat('gpt-4o-mini'),
+        'artifact-model': newapi.chat('gpt-4o'),
       },
       imageModels: {
         'small-model': newapi.image('grok-2-image'),
